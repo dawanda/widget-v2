@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example Widget</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://de.dawanda.com/widget/v2/dawanda-0.1.0.js"></script>
+    <script type="text/javascript" src="http://de.dawanda.com/widget/v2/widget.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function(){
+        new DaWanda.Widget({ 
+          imageVersion:"listview",
+          linkColor:"#267ED5",
+          innerBackgroundColor:"#FFFFFF",
+          backgroundColorBottom:"#FFFFFF",
+          cols:"2",
+          language:"de",
+          borderWidth:"10",
+          backgroundPattern:"",
+          sourceType:"Shop",
+          rows:"2",
+          hideLogo:"false",
+          textColor:"#5d5d5d",
+          hideProductInformation:"false",
+          title:"DaWanda Fanshop",
+          autoSlide:"false",
+          backgroundColorTop:"#e6e6e6",
+          sourceId:"111462",
+          titleFontSize:"12",
+          uuid:"a4bc09da44"
+        }).render();
+      });
+      jQuery.noConflict();
+    </script>
+    <div style="text-align: right; font-family: Arial; font-size: 10px;" class="DaWandaWidgetCopyright">
+      <a href="http://de.dawanda.com" style="color: #267ED5">DaWanda - Products with Love</a>
+    </div>
+  </body>
+</html>
