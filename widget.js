@@ -24,7 +24,9 @@ DaWanda.Widget = function(options) {
     language: 'de',
     hideLogo: false,
     titleFontSize: 12,
-    uuid: 'old-installation'
+    uuid: 'old-installation',
+    containerElement: null,
+    responsiveImageWidth: false
   }, options)
 
   this.api = new DaWanda.API("c140e138d812449959a6d5a7b0d8258197edeb58", this.options.language)
@@ -52,13 +54,18 @@ DaWanda.Widget.prototype = {
   },
 
   getInsertPoint: function() {
-    var result = null
-    var self = this
-    jQuery("script").each(function() {
-      if((this.text.indexOf("new DaWanda.Widget({") > -1) && (this.text.indexOf(self.options.sourceId.toString()) > -1))
-        result = this
-    })
-    return result
+    if (this.options.containerElement != null) {
+      return jQuery(this.options.containerElement)
+
+    } else {
+      var result = null
+      var self = this
+      jQuery("script").each(function() {
+        if((this.text.indexOf("new DaWanda.Widget({") > -1) && (this.text.indexOf(self.options.sourceId.toString()) > -1))
+          result = this
+      })
+      return result
+    }
   },
 
   imageWidth: function() {
@@ -102,7 +109,11 @@ DaWanda.Widget.prototype = {
     var image = new Image()
     var self = this
     image.onload = function() {
-      self.options.imageWidth = image.width
+      if (self.options.responsiveImageWidth == true) {
+        self.options.imageWidth = (self.getInsertPoint().width() - 2) / 2 - 2*10
+      } else {
+        self.options.imageWidth = image.width
+      }
       self.renderProducts()
     }
     image.src = this.getImageUrl(this.products[0])
@@ -214,7 +225,11 @@ DaWanda.Widget.prototype = {
       '</div>'
 
       _this.containerId = _this.getUniqueContainerId("dawandaWidgetOuterContainer")
-      jQuery(this.getInsertPoint()).after(jQuery("<div></div>").attr("id", _this.containerId).append(result))
+      if (this.options.containerElement != null) {
+        jQuery(this.getInsertPoint()).attr("id", _this.containerId).append(result)
+      } else {
+        jQuery(this.getInsertPoint()).after(jQuery("<div></div>").attr("id", _this.containerId).append(result))
+      }
       _this.renderCss()
 
       window.setTimeout(function() {
@@ -284,36 +299,36 @@ DaWanda.Widget.prototype = {
       %{containerId} var, %{containerId} b, %{containerId} u, %{containerId} i, %{containerId} center, %{containerId} dl, %{containerId} dt, %{containerId} dd, %{containerId} ol,          \
       %{containerId} ul, %{containerId} li, %{containerId} fieldset, %{containerId} form, %{containerId} label, %{containerId} legend, %{containerId} table, %{containerId} caption,        \
       %{containerId} tbody, %{containerId} tfoot, %{containerId} thead, %{containerId} tr, %{containerId} th, %{containerId} td {                                                           \
-      	margin: 0;                                                                                                                                                                          \
-      	padding: 0;                                                                                                                                                                         \
-      	border: 0;                                                                                                                                                                          \
-      	outline: 0;                                                                                                                                                                         \
-      	font-size: 100%;                                                                                                                                                                    \
-      	vertical-align: baseline;                                                                                                                                                           \
-      	background: transparent;                                                                                                                                                            \
-      	line-height: 1;                                                                                                                                                                     \
+        margin: 0;                                                                                                                                                                          \
+        padding: 0;                                                                                                                                                                         \
+        border: 0;                                                                                                                                                                          \
+        outline: 0;                                                                                                                                                                         \
+        font-size: 100%;                                                                                                                                                                    \
+        vertical-align: baseline;                                                                                                                                                           \
+        background: transparent;                                                                                                                                                            \
+        line-height: 1;                                                                                                                                                                     \
       }                                                                                                                                                                                     \
       %{containerId} ol, %{containerId} ul {                                                                                                                                                \
-      	list-style: none;                                                                                                                                                                   \
+        list-style: none;                                                                                                                                                                   \
       }                                                                                                                                                                                     \
       %{containerId} blockquote, %{containerId} q {                                                                                                                                         \
-      	quotes: none;                                                                                                                                                                       \
+        quotes: none;                                                                                                                                                                       \
       }                                                                                                                                                                                     \
                                                                                                                                                                                             \
       %{containerId} :focus {                                                                                                                                                               \
-      	outline: 0;                                                                                                                                                                         \
+        outline: 0;                                                                                                                                                                         \
       }                                                                                                                                                                                     \
                                                                                                                                                                                             \
       %{containerId} ins {                                                                                                                                                                  \
-      	text-decoration: none;                                                                                                                                                              \
+        text-decoration: none;                                                                                                                                                              \
       }                                                                                                                                                                                     \
       %{containerId} del {                                                                                                                                                                  \
-      	text-decoration: line-through;                                                                                                                                                      \
+        text-decoration: line-through;                                                                                                                                                      \
       }                                                                                                                                                                                     \
                                                                                                                                                                                             \
       %{containerId} table {                                                                                                                                                                \
-      	border-collapse: collapse;                                                                                                                                                          \
-      	border-spacing: 0;                                                                                                                                                                  \
+        border-collapse: collapse;                                                                                                                                                          \
+        border-spacing: 0;                                                                                                                                                                  \
       }                                                                                                                                                                                     \
     "
 
