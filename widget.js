@@ -52,13 +52,18 @@ DaWanda.Widget.prototype = {
   },
 
   getInsertPoint: function() {
-    var result = null
-    var self = this
-    jQuery("script").each(function() {
-      if((this.text.indexOf("new DaWanda.Widget({") > -1) && (this.text.indexOf(self.options.sourceId.toString()) > -1))
-        result = this
-    })
-    return result
+    if this.options.containerElement != null {
+      return jQuery(this.options.containerElement)
+
+    } else {
+      var result = null
+      var self = this
+      jQuery("script").each(function() {
+        if((this.text.indexOf("new DaWanda.Widget({") > -1) && (this.text.indexOf(self.options.sourceId.toString()) > -1))
+          result = this
+      })
+      return result
+    }
   },
 
   imageWidth: function() {
@@ -214,7 +219,11 @@ DaWanda.Widget.prototype = {
       '</div>'
 
       _this.containerId = _this.getUniqueContainerId("dawandaWidgetOuterContainer")
-      jQuery(this.getInsertPoint()).after(jQuery("<div></div>").attr("id", _this.containerId).append(result))
+      if this.options.containerElement != null {
+        jQuery(this.getInsertPoint()).attr("id", _this.containerId).append(result))
+      } else {
+        jQuery(this.getInsertPoint()).after(jQuery("<div></div>").attr("id", _this.containerId).append(result))
+      }
       _this.renderCss()
 
       window.setTimeout(function() {
