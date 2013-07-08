@@ -212,7 +212,7 @@ function ssInit(){
   
       $(this).find('#ssLoading').remove();
             
-      if($.ss_options.swipe = 'true' && !$.browser.msie){
+      if($.ss_options.swipe = 'true'){
         simpleSwipe(this);
       };
           
