@@ -338,7 +338,7 @@ function ssInit(){
     };
             
     /* Actuates upon the clicking of a left- or right-button classed element */
-    $('.left-button, .right-button, .jump-to').live('click', function() {
+    $('#dawandaWidgetOuterContainer').on('click', '.left-button, .right-button, .jump-to', function() {
       
       var rel = $(this).attr('rel');
       
