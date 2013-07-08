@@ -212,7 +212,7 @@ function ssInit(){
   
       $(this).find('#ssLoading').remove();
             
-      if($.ss_options.swipe = 'true' && !$.browser.msie){
+      if($.ss_options.swipe = 'true'){
         simpleSwipe(this);
       };
           
@@ -338,7 +338,7 @@ function ssInit(){
     };
             
     /* Actuates upon the clicking of a left- or right-button classed element */
-    $('.left-button, .right-button, .jump-to').live('click', function() {
+    $('#dawandaWidgetOuterContainer').on('click', '.left-button, .right-button, .jump-to', function() {
       
       var rel = $(this).attr('rel');
       
