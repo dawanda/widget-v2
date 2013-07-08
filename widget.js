@@ -172,7 +172,7 @@ DaWanda.Widget.prototype = {
       (eval(this.options.autoSlide) ? '    <div class="auto-slider" rel="' + this.options.sourceId +'"></div>' : '') +
       '   <table border="0" cellspacing="0" cellpadding="0" width="100%">' +
       '     <tr>' +
-      '       <td style="padding: 15px 0px 0px 0px" class="dawandaWidgetContent" colspan="2">' +
+      '       <td class="dawandaWidgetContent" colspan="2">' +
       '         <div id="dawandaWidgetHeadline" style="' + (showNormalVersion ? '' : 'height: 20px') + '">'
 
       if(!eval(this.options.hideLogo))
@@ -421,6 +421,10 @@ DaWanda.Widget.prototype = {
                                                                                                                                                                                             \
       %{containerId} #dawandaWidgetContainer .productInformation a {                                                                                                                        \
         line-height: 15px;                                                                                                                                                                  \
+      }                                                                                                                                                                                     \
+                                                                                                                                                                                            \
+      %{containerId} .dawandaWidgetContent {                                                                                                                                                \
+        padding: 15px 0px 0px 0px;                                                                                                                                                          \
       }                                                                                                                                                                                     \
       "
 
