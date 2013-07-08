@@ -1,4 +1,4 @@
-document.write('<script type="text/javascript" src="http://de.dawanda.com/widget/v2/jquery.simpleSlide.js"></script>')
+document.write('<script type="text/javascript" src="./jquery.simpleSlide.js"></script>')
 
 DaWanda.Widget = function(options) {
   if(!options || (!options.sourceType && !options.sourceId))
